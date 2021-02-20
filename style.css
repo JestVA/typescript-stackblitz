@@ -4,9 +4,13 @@ body {
 
 .responsive {
   max-width: 100%;
-  overflow-wrap: break-word;
   margin: auto 2rem;
   padding: 1rem;
+}
+
+code {
+  overflow-wrap: break-word;
+  white-space: pre-wrap;
 }
 
 pre {
