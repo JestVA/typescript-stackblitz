@@ -34,7 +34,9 @@ const initialClientsState: ClientsState = {
   currentClient: newClient
 };
 
-const tango = clients;
+const tango = initialClientsState;
 
 const appDiv: HTMLElement = document.getElementById("app");
-appDiv.innerHTML = `<div class="responsive">${JSON.stringify(tango)}</div>`;
+appDiv.innerHTML = `<div class="responsive">
+  <pre><code>${JSON.stringify(tango, null, 2)}</code></pre>
+</div>`;
