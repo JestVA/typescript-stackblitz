@@ -8,3 +8,11 @@ body {
   margin: auto 2rem;
   padding: 1rem;
 }
+
+pre {
+  background-color: cyan;
+}
+
+::selection {
+  background-color: yellow;
+}
