@@ -1,4 +1,4 @@
-import { Widget } from "./libs";
+import { Widget, Client } from "./libs";
 import { v4 as uuidv4 } from "uuid";
 
 export class HomeComponent {

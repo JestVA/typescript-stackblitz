@@ -7,3 +7,9 @@ export interface Widget extends BaseEntity {
   description: string;
   price: number;
 }
+
+export interface Client extends BaseEntity {
+  firstName: string;
+  lastName: string;
+  company: string;
+}

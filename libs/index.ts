@@ -1,1 +1,1 @@
-export { Widget } from "./interfaces/api-interfaces";
+export { Widget, Client } from "./interfaces/api-interfaces";

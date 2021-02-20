@@ -1,3 +1,10 @@
-h1, h2 {
-  font-family: Lato;
+body {
+  font-family: Helvetica;
+}
+
+.responsive {
+  max-width: 100%;
+  overflow-wrap: break-word;
+  margin: auto 2rem;
+  padding: 1rem;
 }
