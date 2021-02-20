@@ -1,0 +1,9 @@
+{
+  "compilerOptions": {
+    "target": "esnext",
+    "declaration": false,
+    "paths": {
+      "@interfaces/api": ["libs/interfaces/index.ts"]
+    }
+  }
+}
