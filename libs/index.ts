@@ -1,1 +1,1 @@
-export { Widget, Client } from "./interfaces/api-interfaces";
+export { Widget, Client, BaseEntity } from "./interfaces/api-interfaces";

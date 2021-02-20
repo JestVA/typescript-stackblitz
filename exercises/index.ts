@@ -24,7 +24,7 @@ const learnTesting: CleanCode = {
 
 const projects: CleanCode[] = [learnTypescript, learnTesting];
 
-interface CleanCodeState {
+interface CleanCodesState {
   projects: CleanCode[];
   currentProject: CleanCode;
 }
@@ -37,7 +37,7 @@ const newProject: CleanCode = {
   progressAchieved: 0
 };
 
-const initialCleanCodeState: CleanCodeState = {
+const initialCleanCodesState: CleanCodesState = {
   projects,
   currentProject: newProject
 };
