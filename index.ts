@@ -74,9 +74,19 @@ const initialProjectsState: ProjectsState = {
   currentProject: newProject
 };
 
+interface AppState {
+  clientsState: ClientsState;
+  projectsState: ProjectsState;
+}
+
+const appState: AppState = {
+  clientsState: initialClientsState,
+  projectsState: initialProjectsState
+};
+
 // const tango = initialClientsState;
 
-const tango = initialProjectsState;
+const tango = appState;
 
 const appDiv: HTMLElement = document.getElementById("app");
 appDiv.innerHTML = `<div class="responsive">
