@@ -84,8 +84,6 @@ const appState: AppState = {
   projectsState: initialProjectsState
 };
 
-// const tango = initialClientsState;
-
 const tango = appState;
 
 const appDiv: HTMLElement = document.getElementById("app");
