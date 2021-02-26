@@ -50,6 +50,42 @@ class ClientsStore {
   }
 }
 
+interface Action {
+  type: string;
+  payload?: any;
+}
+
+const CLIENT_LOAD = "[Client] Load";
+const CLIENT_CREATE = "[Client] Create";
+const CLIENT_UPDATE = "[Client] Update";
+const CLIENT_DELETE = "[Client] Delete";
+const CLIENT_SELECT = "[Client] Select";
+const CLIENT_CLEAR = "[Client] Clear";
+
+const loadClients = (state, clients) => {
+  console.log(clients);
+  return state;
+};
+
+const selectClient = (state, client) => {
+  console.log(client);
+  return state;
+};
+
+const clientsReducer = (
+  state: ClientsState = initialClientsState,
+  action: Action
+) => {
+  switch (action.type) {
+    case CLIENT_LOAD:
+      return loadClients(state, action.payload);
+    case CLIENT_SELECT:
+      return selectClient(state, action.payload);
+    default:
+      return state;
+  }
+};
+
 const clientsStore = new ClientsStore(initialClientsState);
 
 const currentClient = clientsStore.select("currentClient");
@@ -111,7 +147,40 @@ class ProjectsStore {
   }
 }
 
+const PROJECT_LOAD = "[Project] Load";
+const PROJECT_CREATE = "[Project] Create";
+const PROJECT_UPDATE = "[Project] Update";
+const PROJECT_DELETE = "[Project] Delete";
+const PROJECT_SELECT = "[Project] Select";
+const PROJECT_CLEAR = "[Project] Clear";
+
+const loadProjects = (state, projects) => {
+  console.log(projects);
+  return state;
+};
+
+const selectProject = (state, project) => {
+  console.log(project);
+  return state;
+};
+
+const projectsReducer = (
+  state: ProjectsState = initialProjectsState,
+  action: Action
+) => {
+  switch (action.type) {
+    case PROJECT_LOAD:
+      return loadProjects(state, action.payload);
+    case PROJECT_SELECT:
+      return selectProject(state, action.payload);
+    default:
+      return state;
+  }
+};
+
 const projectsStore = new ProjectsStore(initialProjectsState);
+
+const currentProjects = projectsStore.select("projects");
 
 const currentProject = projectsStore.select("currentProject");
 
@@ -125,7 +194,7 @@ const appState: AppState = {
   projectsState: initialProjectsState
 };
 
-const tango = currentProject;
+const tango = currentProjects;
 
 const appDiv: HTMLElement = document.getElementById("app");
 appDiv.innerHTML = `<div class="responsive">

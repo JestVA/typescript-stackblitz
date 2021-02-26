@@ -58,6 +58,38 @@ class ProjectsStore {
   }
 }
 
+interface Action {
+  type: string;
+  payload?: any;
+}
+
+const PROJECT_CREATE = "[Project] Create";
+const PROJECT_DELETE = "[Project] Delete";
+
+const createProjects = (state, projects) => {
+  console.log(projects);
+  return state;
+};
+
+const deleteProject = (state, project) => {
+  console.log(project);
+  return state;
+};
+
+const projectsReducer = (
+  state: CleanCodesState = initialCleanCodesState,
+  action: Action
+) => {
+  switch (action.type) {
+    case PROJECT_CREATE:
+      return createProjects(state, action.payload);
+    case PROJECT_DELETE:
+      return deleteProject(state, action.payload);
+    default:
+      return state;
+  }
+};
+
 const projectsStore = new ProjectsStore(initialCleanCodesState);
 
 const selectedProjecs = projectsStore.select("projects");
