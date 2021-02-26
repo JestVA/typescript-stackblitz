@@ -34,26 +34,25 @@ const initialClientsState: ClientsState = {
   currentClient: newClient
 };
 
-class ClientStore {
-  clients: Client[];
-  currentClient: Client;
+class ClientsStore {
+  state: ClientsState;
 
-  load(newClients: Client[]) {
-    this.clients = newClients;
+  constructor(state: ClientsState) {
+    this.state = state;
   }
-  select(client: Client) {
-    this.currentClient = client;
+
+  getState(): ClientsState {
+    return this.state;
   }
-  create(newClient: Client) {
-    this.clients = [...this.clients, newClient];
+
+  select(key: string) {
+    return this.state[key];
   }
 }
 
-const clientStore = new ClientStore();
+const clientsStore = new ClientsStore(initialClientsState);
 
-clientStore.load(clients);
-
-clientStore.select(dorin);
+const currentClient = clientsStore.select("currentClient");
 
 interface Project extends BaseEntity {
   title: string;
@@ -95,6 +94,27 @@ const initialProjectsState: ProjectsState = {
   currentProject: newProject
 };
 
+class ProjectsStore {
+  state: ProjectsState;
+
+  constructor(state: ProjectsState) {
+    this.state = state;
+  }
+
+  getState(): ProjectsState {
+    // this must return something as it is not null or any typed
+    return this.state;
+  }
+
+  select(key: string) {
+    return this.state[key];
+  }
+}
+
+const projectsStore = new ProjectsStore(initialProjectsState);
+
+const currentProject = projectsStore.select("currentProject");
+
 interface AppState {
   clientsState: ClientsState;
   projectsState: ProjectsState;
@@ -105,7 +125,7 @@ const appState: AppState = {
   projectsState: initialProjectsState
 };
 
-const tango = clientStore;
+const tango = currentProject;
 
 const appDiv: HTMLElement = document.getElementById("app");
 appDiv.innerHTML = `<div class="responsive">

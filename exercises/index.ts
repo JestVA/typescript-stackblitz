@@ -41,3 +41,23 @@ const initialCleanCodesState: CleanCodesState = {
   projects,
   currentProject: newProject
 };
+
+class ProjectsStore {
+  state: CleanCodesState;
+
+  constructor(state: CleanCodesState) {
+    this.state = state;
+  }
+
+  getState(): CleanCodesState {
+    return this.state;
+  }
+
+  select(key: string) {
+    return this.state[key];
+  }
+}
+
+const projectsStore = new ProjectsStore(initialCleanCodesState);
+
+const selectedProjecs = projectsStore.select("projects");
