@@ -111,6 +111,13 @@ const hellProject: Project = {
   completed: true
 };
 
+const superProject: Project = {
+  id: "3",
+  title: "Make Galois.ai a real LTD company",
+  description: "Hire people and give them code to crunch",
+  completed: false
+};
+
 const newProject: Project = {
   id: null,
   title: "",
@@ -131,10 +138,12 @@ const initialProjectsState: ProjectsState = {
 };
 
 class ProjectsStore {
+  reducer;
   state: ProjectsState;
 
-  constructor(state: ProjectsState) {
+  constructor(state: ProjectsState, reducer) {
     this.state = state;
+    this.reducer = reducer;
   }
 
   getState(): ProjectsState {
@@ -144,6 +153,10 @@ class ProjectsStore {
 
   select(key: string) {
     return this.state[key];
+  }
+
+  dispatch(action: Action) {
+    this.state = this.reducer(this.state, action);
   }
 }
 
@@ -157,7 +170,7 @@ const PROJECT_DELETE = "[Project] Delete";
 const loadProjects = (state, projects): ProjectsState => {
   return {
     projects,
-    currentProject: state.currentClient
+    currentProject: state.currentProject
   };
 };
 
@@ -220,23 +233,29 @@ const projectsReducer = (
   }
 };
 
-const projectsStore = new ProjectsStore(initialProjectsState);
+const projectsStore = new ProjectsStore(initialProjectsState, projectsReducer);
 
-const currentProjects = projectsStore.select("projects");
+// if we put this dispatcher below the constants for allprojects and current project, the ui does not update (because this is not React, hah!)
+projectsStore.dispatch({ type: PROJECT_CREATE, payload: superProject });
+
+// handy ways to have selectors for each bit of isolated state ( when we do not have app state interfce enabled )
+const allProjects = projectsStore.select("projects");
 
 const currentProject = projectsStore.select("currentProject");
 
 interface AppState {
-  clientsState: ClientsState;
+  // clientsState: ClientsState;
   projectsState: ProjectsState;
 }
 
 const appState: AppState = {
-  clientsState: initialClientsState,
+  // clientsState: initialClientsState,
   projectsState: initialProjectsState
 };
 
-const tango = currentProjects;
+// HTML context rendering
+
+const tango = allProjects;
 
 const appDiv: HTMLElement = document.getElementById("app");
 appDiv.innerHTML = `<div class="responsive">
