@@ -148,20 +148,54 @@ class ProjectsStore {
 }
 
 const PROJECT_LOAD = "[Project] Load";
+const PROJECT_SELECT = "[Project] Select";
+const PROJECT_CLEAR = "[Project] Clear";
 const PROJECT_CREATE = "[Project] Create";
 const PROJECT_UPDATE = "[Project] Update";
 const PROJECT_DELETE = "[Project] Delete";
-const PROJECT_SELECT = "[Project] Select";
-const PROJECT_CLEAR = "[Project] Clear";
 
-const loadProjects = (state, projects) => {
-  console.log(projects);
-  return state;
+const loadProjects = (state, projects): ProjectsState => {
+  return {
+    projects,
+    currentProject: state.currentClient
+  };
 };
 
-const selectProject = (state, project) => {
-  console.log(project);
-  return state;
+const selectProject = (state, project): ProjectsState => {
+  return {
+    projects: state.projects,
+    currentProject: project
+  };
+};
+
+const clearProject = (state): ProjectsState => {
+  return {
+    projects: state.projects,
+    currentProject: null
+  };
+};
+
+const createProject = (state, project): ProjectsState => {
+  return {
+    projects: [...state.projects, project],
+    currentProject: state.currentProject
+  };
+};
+
+const updateProject = (state, project): ProjectsState => {
+  return {
+    projects: state.projects.map(p =>
+      p.id === project.id ? Object.assign({}, project) : p
+    ),
+    currentProject: state.currentProject
+  };
+};
+
+const deleteProject = (state, project): ProjectsState => {
+  return {
+    projects: state.projects.filter(p => p.id !== project.id),
+    currentProject: state.currentProject
+  };
 };
 
 const projectsReducer = (
@@ -173,6 +207,14 @@ const projectsReducer = (
       return loadProjects(state, action.payload);
     case PROJECT_SELECT:
       return selectProject(state, action.payload);
+    case PROJECT_CLEAR:
+      return clearProject(state);
+    case PROJECT_CREATE:
+      return createProject(state, action.payload);
+    case PROJECT_UPDATE:
+      return updateProject(state, action.payload);
+    case PROJECT_DELETE:
+      return deleteProject(state, action.payload);
     default:
       return state;
   }
